@@ -32,11 +32,11 @@ const Header: FC<HeaderProps> = ({ activeSection }) => {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 flex h-14 rounded-md max-md:border-b max-md:bg-bg md:h-16",
+        "sticky top-0 z-50 flex h-12 rounded-md max-md:border-b max-md:bg-bg md:h-16",
         scrolled && "pointer-events-none"
       )}
     >
-      <div className="container flex h-full max-w-screen-2xl items-center backdrop-blur-md md:backdrop-blur-none">
+      <div className="flex h-full w-full items-center bg-sky-800/70 backdrop-blur-sm md:backdrop-blur-none md:bg-transparent md:container">
         {/* Desktop Nav */}
         <div className="hidden w-full items-center justify-between md:flex">
           <div className="w-[130px]">
@@ -113,53 +113,13 @@ const Header: FC<HeaderProps> = ({ activeSection }) => {
                 <LinkedinIcon className="text-sky-700" size={25} />
               </Link>
             </Button>
-            {/* <ThemeToggle /> */}
           </div>
         </div>
         {/* Mobile nav */}
-        <div className="flex w-full items-center gap-4 md:hidden">
-          <Link
-            href="/"
-            className={cn(
-              focusRing(),
-              "flex w-[130px] items-center space-x-2 rounded transition-opacity hover:opacity-80"
-            )}
-          >
-            <Image
-              src={siteConfig.global.logo}
-              alt={siteConfig.global.name}
-              loading="lazy"
-              width={24}
-              height={24}
-            />
-            <div className="mt-1 font-josephin font-bold leading-normal tracking-tighter">
-              {siteConfig.global.name}
-            </div>
-            <Badge variant="outline" className="border">
-              beta
-            </Badge>
-          </Link>
-          {/* <SearchDocs className="flex-1" size="sm">
-            <span className="mr-4 flex-1 text-left">Search...</span>
-          </SearchDocs> */}
-          {/* <Drawer>
-            <DrawerTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-9 w-9 p-0">
-                <MenuIcon className="h-5 w-5" />
-                <span className="sr-only">Open menu</span>
-              </Button>
-            </DrawerTrigger>
-            <DrawerContent className="sm:max-w-[425px]">
-              <DrawerHeader>
-                <DrawerTitle>Menu</DrawerTitle>
-              </DrawerHeader>
-              <Nav
-                direction="col"
-                items={[{ label: "Home", href: "/" }, ...config.nav.links]}
-                onNavItemClick={() => { }}
-              />
-            </DrawerContent>
-          </Drawer> */}
+        <div className="flex w-full items-center justify-center md:hidden">
+          <span className="text-[#FEFFEB] text-lg font-bold">
+            {siteConfig.global.name}
+          </span>
         </div>
       </div>
     </header>
