@@ -1,11 +1,9 @@
 "use client";
 
 import React, { FC } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import GitHubIcon from "@/components/icons/technologies/github-icon";
-import { Badge } from "@/components/ui/badge";
 import { useScrolled } from "@/hooks/use-scrolled";
 import { focusRing } from "@/lib/utils/styles";
 import { Button } from "@/components/ui/button";

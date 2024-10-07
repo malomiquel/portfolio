@@ -12,12 +12,11 @@ import SectionHeader from "@/components/section-header";
 const portfolioProjects = [
   {
     company: "Personnel",
-    year: "2024",
+    year: "2024 (en développement)",
     title: "Portfolio",
     technologies: [
       "Next.js",
       "TailwindCSS",
-      "Shadcn",
     ],
     link: "https://github.com/malomiquel/portfolio",
     image: portfolio,
@@ -27,7 +26,7 @@ const portfolioProjects = [
     year: "2024",
     title: "Star Wars Search System",
     technologies: [
-      "React JS",
+      "React",
       "Node.js",
       "Hapi.js",
       "Swapi API",
@@ -42,7 +41,6 @@ const portfolioProjects = [
     technologies: [
       "Next.js",
       "TailwindCSS",
-      "Vercel",
     ],
     link: "https://pulse-events.fr/",
     image: pulseEvents,

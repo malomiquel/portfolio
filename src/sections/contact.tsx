@@ -16,7 +16,8 @@ const Contact = forwardRef(function Contact(_, ref: ForwardedRef<Element>) {
             <div>
               <h2 className="font-serif text-2xl md:text-3xl">Faisons connaissance</h2>
               <p className="text-sm md:text-base mt-2">
-                Prêt à collaborer avec moi ? Contactez-moi et discutons de comment je peux vous aider.
+                Prêt à collaborer avec moi ? Contactez-moi et discutons de mes
+                expériences.
               </p>
             </div>
             <div>

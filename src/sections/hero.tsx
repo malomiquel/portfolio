@@ -52,7 +52,7 @@ const Hero = forwardRef(function Hero(_, ref: ForwardedRef<Element>) {
           </h1>
           <p className="mt-4 text-center text-sky-700/80 md:text-lg">
             Passionné par la tech et le développement, je suis disponible pour
-            créer des applications sur mesure.
+            contribuer à la réalisation de votre projet.
           </p>
         </div>
         <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
