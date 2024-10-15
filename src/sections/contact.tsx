@@ -12,7 +12,7 @@ const Contact = forwardRef(function Contact(_, ref: ForwardedRef<Element>) {
               backgroundImage: `url(${grainImage.src})`,
             }}
           ></div>
-          <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center justify-around">
             <div>
               <h2 className="font-serif text-2xl md:text-3xl">Faisons connaissance</h2>
               <p className="text-sm md:text-base mt-2">

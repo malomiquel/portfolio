@@ -1,15 +1,15 @@
 "use client";
 
-import React, { FC } from "react";
+import { FC, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import GitHubIcon from "@/components/icons/technologies/github-icon";
 import { useScrolled } from "@/hooks/use-scrolled";
-import { focusRing } from "@/lib/utils/styles";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config";
 import LinkedinIcon from "@/components/icons/linkedin-icon";
 import { Section } from "@/types/sections";
+import { AnimatePresence, motion } from "framer-motion";
 
 const config = siteConfig.header;
 
@@ -37,20 +37,8 @@ const Header: FC<HeaderProps> = ({ activeSection }) => {
       <div className="flex h-full w-full items-center bg-sky-800/70 backdrop-blur-sm md:backdrop-blur-none md:bg-transparent md:container">
         {/* Desktop Nav */}
         <div className="hidden w-full items-center justify-between md:flex">
-          <div className="w-[130px]">
-            <Link
-              href="/"
-              className={cn(
-                focusRing(),
-                "flex items-center gap-2 rounded opacity-100 transition-[opacity,transform] duration-300 ease-out",
-                scrolled && "pointer-events-none -translate-x-2 opacity-0"
-              )}
-              aria-hidden={scrolled}
-            >
-              <div className="mt-1 font-bold text-lg text-sky-700 leading-normal tracking-tighter">
-                {siteConfig.global.name}
-              </div>
-            </Link>
+          <div className="mt-1 font-bold text-lg text-sky-700 leading-normal tracking-tighter">
+            {siteConfig.global.name}
           </div>
           <div
             className={cn(
@@ -73,7 +61,11 @@ const Header: FC<HeaderProps> = ({ activeSection }) => {
                 `,
               }}
             />
-            <Nav scrolled={scrolled} items={config.nav.links} activeSection={activeSection} onNavItemClick={scrollToSection} />
+            <Nav
+              scrolled={scrolled}
+              items={config.nav.links}
+              onNavItemClick={scrollToSection}
+            />
           </div>
           <div
             className={cn(
@@ -131,7 +123,6 @@ interface NavItem {
 
 interface NavProps {
   items: NavItem[];
-  activeSection: Section;
   scrolled?: boolean;
   direction?: "col" | "row";
   onNavItemClick?: (section: Section) => void;
@@ -139,35 +130,48 @@ interface NavProps {
 
 const Nav: FC<NavProps> = ({
   items,
-  activeSection,
   scrolled,
   direction = "row",
   onNavItemClick,
 }) => {
+  const [elementFocused, setElementFocused] = useState<number | null>(null);
+
+  const handleHoverButton = (index: number | null) => {
+    setElementFocused(index);
+  };
 
   return (
     <nav
       className={cn("flex items-center gap-0 sm:gap-2", {
         "flex-col gap-2": direction === "col",
       })}
+      onMouseLeave={() => handleHoverButton(null)}
     >
       {items.map(
         (item, index) => (
           <button
             key={index}
             className={cn(
-              focusRing(),
-              "flex relative items-center cursor-pointer justify-center gap-2 rounded px-4 py-1 text-md font-medium text-fg/60 transition-colors duration-300 group",
-              scrolled ? "hover:bg-[#FEFFEB]/20" : "hover:bg-sky-700/80",
+              "flex relative items-center cursor-pointer justify-center gap-2 rounded px-4 py-1 text-md font-medium text-fg/60 transition-colors duration-200",
+              scrolled ? "text-white" : "text-sky-700 hover:text-white"
             )}
             onClick={() => onNavItemClick?.(item.id as Section)}
+            onMouseEnter={() => handleHoverButton(index)}
           >
-            <span className={cn(
-              "text-sky-700 relative",
-              scrolled && "text-white"
-            )}>
-              {item.label}
-            </span>
+            {item.label}
+            <AnimatePresence>
+              {elementFocused === index && (
+                <motion.div
+                  animate={{ opacity: 1, scale: 1 }}
+                  className={cn("-z-10 absolute top-0 right-0 bottom-0 left-0 rounded-md bg-sky-300/30", !scrolled && "bg-sky-800/70")}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  layout={true}
+                  layoutId="focused-element"
+                  transition={{ duration: 0.2 }}
+                />
+              )}
+            </AnimatePresence>
           </button>
         )
       )}
